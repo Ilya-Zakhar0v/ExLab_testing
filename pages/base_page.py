@@ -18,11 +18,28 @@ class BasePage():
     # Проверяет видимость элемента на странице
     def element_is_visible(self, locator, timeout=10):
         return wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
-        # return wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
 
     # Ждем пока все элементы не будут видимы
     def elements_are_visible(self, locator, timeout=10):
         return wait(self.browser, timeout).until(ec.visibility_of_all_elements_located(locator))
+
+    # Поиск скрытого элемента
+    def element_is_present(self, locator, timeout=10):
+        return wait(self.browser, timeout).until(ec.presence_of_element_located(locator))
+
+    # Поиск всех элементов
+    def element_are_present(self, locator, timeout=10):
+        return wait(self.browser, timeout).until(ec.presence_of_all_elements_located(locator))
+
+    # Кликабельный элемент
+    def element_is_clickable(self, locator, timeout=10):
+        return wait(self.browser, timeout).until(ec.element_to_be_clickable(locator))
+
+    # Перемещение скролла к элеменету
+    def go_to_element(self, element):
+        self.browser.execute_script("arguments[0].scrollIntoView();", element)
+
+
 
     """ ------------- OTUS ------------- """
 
