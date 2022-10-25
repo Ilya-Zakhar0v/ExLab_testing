@@ -1,6 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait as Wait
-from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait  # Явное ожидаение
 from selenium.common.exceptions import TimeoutException
@@ -18,11 +17,12 @@ class BasePage():
 
     # Проверяет видимость элемента на странице
     def element_is_visible(self, locator, timeout=10):
-        return Wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
+        return wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
+        # return wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
 
     # Ждем пока все элементы не будут видимы
     def elements_are_visible(self, locator, timeout=10):
-        return Wait(self.browser, timeout).until(ec.visibility_of_all_elements_located(locator))
+        return wait(self.browser, timeout).until(ec.visibility_of_all_elements_located(locator))
 
     """ ------------- OTUS ------------- """
 
