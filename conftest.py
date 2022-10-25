@@ -37,6 +37,7 @@ def browser(request):
         browser = webdriver.Chrome(options=options)
         # executable_path='/Users/ilyich/Downloads/chromedriver'
         browser.implicitly_wait(10)  # Не явное ожидание элементов 10 сек.
+        browser.maximize_window()  # Открываем браузер на весь экран
 
     elif browser_name == "firefox":
 
@@ -51,7 +52,6 @@ def browser(request):
         fp.set_preference("intl.accept_languages", user_language)
         browser = webdriver.Firefox(firefox_profile=fp)
         browser.implicitly_wait(10)  # Не явное ожидание элементов 10 сек.
-
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser
