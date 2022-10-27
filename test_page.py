@@ -73,9 +73,24 @@ def test_language_button(browser):
 
 def test_join_button(browser):
     """ № 9. Отображение кнопки [Присоединиться] """
-    page = MainPage(browser)
-    page.open()
-    page.join_button()
+    join_button = MainPage(browser)
+    join_button.open()
+    join_button.join_button()
+
+
+def test_logo_in_blog(browser):
+    """ № 11. Отображение логотипа  ExLab в блоке """
+    logo_in_blog = MainPage(browser)
+    logo_in_blog.open()
+    logo_in_blog.checkout_logo_in_blog()
+
+
+def test_inscription(browser):
+    """ № 12. Отображение надписи Твоя возможность """
+    inscription = MainPage(browser)
+    inscription.open()
+    inscription.checkout_inscription_in_blog()
+
 
 
 #####

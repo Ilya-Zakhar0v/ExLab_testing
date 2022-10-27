@@ -20,7 +20,8 @@ class MainPage(BasePage):
     def background_color(self):
         black_background = 'sc-bczRLJ ckyTig'  # Аттрибут class (black theme)
         # white_background = 'sc-bczRLJ cxdoLY'
-        assert self.browser.find_element(*Main.BLACK_BACKGROUND).get_attribute('class') == black_background, 'Некорретная тема лендинга (ОР: Black)'
+        assert self.browser.find_element(*Main.BLACK_BACKGROUND).get_attribute('class') == black_background,\
+            'Некорретная тема лендинга (ОР: Black)'
 
     # Search Logo ExLab
     def lending_logo(self):
@@ -43,13 +44,15 @@ class MainPage(BasePage):
         first_window = self.browser.window_handles[1]
         self.browser.switch_to.window(first_window)
         assert self.browser.current_url == 'https://t.me/ExLab_registration_bot', 'Не тот урл'
-        time.sleep(1)
 
         # assert self.browser.current_url == "https://t.me/ExLab_registration_bot", 'Не корректный url'
         # assert "t.me/ExLab_registration_bot" in self.browser.current_url, 'Не корректный url'
 
-    def logo_for_otus(self):
-        self.wait_for_visible(Main.LOGO)
+    def checkout_logo_in_blog(self):
+        assert self.element_is_visible(Main.LOGO_IN_BLOG), 'Отсутствует лого ExLab блоге'
+
+    def checkout_inscription_in_blog(self):
+        assert self.element_is_visible(Main.INSCRIPTION_IN_BLOG)
 
 
 

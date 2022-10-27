@@ -36,8 +36,14 @@ class BasePage():
         return wait(self.browser, timeout).until(ec.element_to_be_clickable(locator))
 
     # Перемещение скролла к элеменету
-    def go_to_element(self, element):
-        self.browser.execute_script("arguments[0].scrollIntoView();", element)
+    def go_to_element(self):
+
+        self.browser.execute_script("window.scrollTo(0, 1080);")
+
+
+
+    def scroll_to_down(self):
+        self.browser.execute_script()
 
 
 

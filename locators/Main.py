@@ -14,6 +14,8 @@ class Main:
     JOIN_BUTTON_NOT_CLICK = (By.XPATH, "//div[@class='sc-gKXOVf kORzJB']/div[@id='logo_mobile']")
     JOIN_BUTTON = (By.XPATH, "//div[@class='sc-hAZoDl hrEelO']/a[@href='https://t.me/ExLab_registration_bot' and "
                              "contains (text(), 'Присоединиться') ]")
+    LOGO_IN_BLOG = (By.XPATH, "//img[@src='./gif/logo.gif']")
+    INSCRIPTION_IN_BLOG = (By.XPATH, "//div[@class='sc-kgflAQ gupdxc' and contains(text(), 'Твоя возможность')]")
 
     class TopMenu:
 
@@ -23,7 +25,7 @@ class Main:
         START_UP = (By.XPATH, "//a[@href='#startup'][@class='sc-evZas hJsxZw']")
 
     class EnterMenu:
-        IN_ABOUT_US = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]")
+        IN_ABOUT_US = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'О нас')]")
         IN_PROJECTS = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]")
         IN_MENTORS = (By.XPATH, "//div[@id='mentors']/div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'Менторы')]")
-        IN_STARTUP = (By.XPATH, "//div[@id='startup']/div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'StartUp для')]")
+        IN_STARTUP = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains(text(), 'StartUp для')]")
