@@ -9,7 +9,6 @@ class TopMenu(BasePage):
     # Search 'About Us'
     def checkout_about_us_in_top_menu(self):
         assert self.element_is_visible(Main.TopMenu.ABOUT_US), "Ссылка <<О нас>> отсутствует в топ меню"
-        assert self.element_is_clickable(Main.TopMenu.ABOUT_US), "Ссылка не кликабельна"
         self.element_is_visible(Main.TopMenu.ABOUT_US).click()
         assert self.element_is_visible(Main.EnterMenu.IN_ABOUT_US), "Элемент <<О нас>> отсутствует в теле страницы"
 
@@ -38,4 +37,5 @@ class TopMenu(BasePage):
         assert self.element_is_visible(Main.EnterMenu.IN_STARTUP), "Элемент <<StartUp для>> отсутствует в теле страницы"
         # self.go_to_element()
         time.sleep(2)
+
 

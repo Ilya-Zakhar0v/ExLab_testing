@@ -85,6 +85,14 @@ class BasePage():
             return False
         return True
 
+    # test test test
+    def is_element_present_tes(self, locator, timeout=5):
+        try:
+            WebDriverWait(self.browser, timeout).until(ec.visibility_of(self.element(locator)))
+        except NoSuchElementException:
+            return False
+        return True
+
     # Клик по элементу
 #    def click(self, selector):
 #        WebDriverWait(self.browser, 10).until(ec.element_to_be_clickable())

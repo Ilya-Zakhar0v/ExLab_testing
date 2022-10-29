@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class Main:
 
-    BLACK_BACKGROUND = (By.XPATH, "//div[@class='sc-bczRLJ ckyTig']")
+    DARK_BACKGROUND = (By.XPATH, "//div[@class='sc-bczRLJ ckyTig']")
     WHITE_BACKGROUND = (By.XPATH, "//div[@class='sc-bczRLJ cxdoLY']")
     LOGO = (By.XPATH, "//div[@class='sc-gKXOVf kORzJB']/div[@id='logo_mobile']")
 
@@ -14,8 +14,10 @@ class Main:
     JOIN_BUTTON_NOT_CLICK = (By.XPATH, "//div[@class='sc-gKXOVf kORzJB']/div[@id='logo_mobile']")
     JOIN_BUTTON = (By.XPATH, "//div[@class='sc-hAZoDl hrEelO']/a[@href='https://t.me/ExLab_registration_bot' and "
                              "contains (text(), 'Присоединиться') ]")
-    LOGO_IN_BLOG = (By.XPATH, "//img[@src='./gif/logo.gif']")
+    # LOGO_IN_BLOG = (By.XPATH, "//img[@src='./gif/logo.gif']")
+    LOGO_IN_BLOG = (By.XPATH, "//img[@alt='gif_logo']")
     INSCRIPTION_IN_BLOG = (By.XPATH, "//div[@class='sc-kgflAQ gupdxc' and contains(text(), 'Твоя возможность')]")
+    ALL_INSCRIPTION_IN_BLOG = (By.XPATH, "//span[@class='sc-iIPllB iQpluR is-inview' and contains(text(), 'Получить')]")
 
     class TopMenu:
 
@@ -29,3 +31,6 @@ class Main:
         IN_PROJECTS = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]")
         IN_MENTORS = (By.XPATH, "//div[@id='mentors']/div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'Менторы')]")
         IN_STARTUP = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains(text(), 'StartUp для')]")
+
+    class Block:
+        TEXT_IN_BLOCK_ABOUT_US = (By.LINK_TEXT, "Мы стартовали в апреле 2022 года")

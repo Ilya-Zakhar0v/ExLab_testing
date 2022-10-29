@@ -16,8 +16,6 @@ def test_landing_url(browser):
     landing_url.open()
     landing_url.check_url()
     landing_url.background_color()
-    # Проверка всей ссылки
-    # WebDriverWait(browser, 2).until(ec.url_to_be('http://test.exlab.team/'))
 
 
 def test_landing_logo(browser):
@@ -89,9 +87,14 @@ def test_inscription(browser):
     """ № 12. Отображение надписи Твоя возможность """
     inscription = MainPage(browser)
     inscription.open()
-    inscription.checkout_inscription_in_blog()
+    inscription.checkout_inscriptions_in_blog()
 
 
+def test_block_about_us(browser):
+    """ № 13. Отображение надписи О нас """
+    block_about_us = MainPage(browser)
+    block_about_us.open()
+    block_about_us.block_abouts_us()
 
 #####
 
