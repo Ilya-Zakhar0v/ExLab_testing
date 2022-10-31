@@ -16,8 +16,10 @@ class Main:
                              "contains (text(), 'Присоединиться') ]")
     # LOGO_IN_BLOG = (By.XPATH, "//img[@src='./gif/logo.gif']")
     LOGO_IN_BLOG = (By.XPATH, "//img[@alt='gif_logo']")
+
     INSCRIPTION_IN_BLOG = (By.XPATH, "//div[@class='sc-kgflAQ gupdxc' and contains(text(), 'Твоя возможность')]")
-    ALL_INSCRIPTION_IN_BLOG = (By.XPATH, "//span[@class='sc-iIPllB iQpluR is-inview' and contains(text(), 'Получить')]")
+    INSCRIPTION_ALL = (By.XPATH, "//ol[@class='sc-ivTmOn iPWoOL']")
+    INSCRIPTION_IN_BLOG_01 = (By.XPATH, "//li[@class='sc-cxabCf iOiPKd'][1]")
 
     class TopMenu:
 

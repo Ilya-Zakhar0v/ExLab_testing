@@ -19,8 +19,7 @@ class TopMenu(BasePage):
         self.element_is_visible(Main.TopMenu.PROJECTS).click()
         assert self.element_is_visible(Main.EnterMenu.IN_PROJECTS), "Элемент <<Проекты>> отсутствует в теле страницы"
         # Скролл до элемента
-        # self.browser.execute_script("return arguments[0].scrollIntoView();",
-        #                            self.browser.find_element(By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]"))
+        # self.browser.execute_script("return arguments[0].scrollIntoView();", self.browser.find_element(By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]"))
 
     # Search 'Mentors'
     def checkout_mentors_top_menu(self):

@@ -15,6 +15,14 @@ class BasePage():
     def open(self):
         return self.browser.get(self.url)
 
+    # Ищем по тексту
+    def get_element_text(self, how, what):
+        return self.browser.find_element(how, what).text
+
+    def element(self, how, what):
+        return self.browser.find_element(how, what)
+
+
     # Проверяет видимость элемента на странице
     def element_is_visible(self, locator, timeout=10):
         return wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
@@ -37,10 +45,7 @@ class BasePage():
 
     # Перемещение скролла к элеменету
     def go_to_element(self):
-
         self.browser.execute_script("window.scrollTo(0, 1080);")
-
-
 
     def scroll_to_down(self):
         self.browser.execute_script()
@@ -49,7 +54,7 @@ class BasePage():
 
     """ ------------- OTUS ------------- """
 
-    def element(self, selector):
+    # def element(self, selector):
         #by = None
         #if link_text:
         #    by = By.LINK_TEXT
@@ -59,36 +64,29 @@ class BasePage():
         #elif 'xpath' in selector.keys():
         #    by = By.XPATH
         #    selector = selector['xpath']
-        return self.browser.find_elements(selector)
+        # return self.browser.find_elements(selector)
 
-    def click(self, selector):
-        ActionChains(self.browser).move_to_element(self.element(selector)).click().perform()
+#    def click(self, selector):
+#        ActionChains(self.browser).move_to_element(self.element(selector)).click().perform()
+#
+#    def input(self, selector, value):
+#        element = self.element(selector)
+#        element.clear()
+#        element.send_keys(value)
 
-    def input(self, selector, value):
-        element = self.element(selector)
-        element.clear()
-        element.send_keys(value)
+#    def wait_for_visible(self, selector, wait=3):
+#        return WebDriverWait(self.browser, wait).until(ec.visibility_of(self.element(selector)))
 
-    def wait_for_visible(self, selector, wait=3):
-        return WebDriverWait(self.browser, wait).until(ec.visibility_of(self.element(selector)))
-
-    def get_element_text(self, selector):
-        return self.element(selector).text
+#    def get_element_text(self, selector):
+#        return self.element(selector).text
 
     """ ------------- OTUS ------------- """
 
-    # Проверка элемента, если не находит выкидывает ошибку (Рабочий)
-    def is_element_present(self, locator):
-        try:
-            self.browser.find_element(locator)
-        except NoSuchElementException:
-            return False
-        return True
 
-    # test test test
-    def is_element_present_tes(self, locator, timeout=5):
+    # Проверка элемента, если не находит выкидывает ошибку (Рабочий)
+    def is_element_present(self, how, what):
         try:
-            WebDriverWait(self.browser, timeout).until(ec.visibility_of(self.element(locator)))
+            self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
         return True

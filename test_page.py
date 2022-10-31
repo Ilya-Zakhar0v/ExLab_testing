@@ -84,7 +84,7 @@ def test_logo_in_blog(browser):
 
 
 def test_inscription(browser):
-    """ № 12. Отображение надписи Твоя возможность """
+    """ № 12. Отображение надписи Твоя возможность и текста под ней """
     inscription = MainPage(browser)
     inscription.open()
     inscription.checkout_inscriptions_in_blog()

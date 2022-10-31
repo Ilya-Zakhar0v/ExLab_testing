@@ -1,21 +1,17 @@
-import time
-
 from .base_page import BasePage
 from .top_menu import TopMenu
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from locators import Main
-from selenium import webdriver
 
 
 class MainPage(BasePage):
 
     # Проверка URL
     def check_url(self):
-        assert self.browser.current_url == self.url, 'Не корректный url'
-        assert 'test.exlab.team' in self.browser.current_url, 'Не корректный url'
-        assert WebDriverWait(self.browser, 5).until(ec.url_to_be('http://test.exlab.team/')), 'Не корректный url'
+        assert self.browser.current_url == 'http://test.exlab.team/', 'Не корректный url'
+        # assert 'test.exlab.team' in self.browser.current_url, 'Не корректный url'
+        # assert WebDriverWait(self.browser, 5).until(ec.url_to_be('http://test.exlab.team/')), 'Не корректный url'
 
     # Dark Theme
     def background_color(self):
@@ -26,6 +22,7 @@ class MainPage(BasePage):
 
     # Search Logo ExLab
     def lending_logo(self):
+        # assert self.is_element_present_tes(Main.LOGO)
         assert self.element_is_visible(Main.LOGO), 'Лого не найдено'
 
     # Search Sun Icon
@@ -43,22 +40,32 @@ class MainPage(BasePage):
         first_window = self.browser.window_handles[1]
         self.browser.switch_to.window(first_window)
         assert self.browser.current_url == 'https://t.me/ExLab_registration_bot', 'Не корректный url'
-        assert "t.me/ExLab_registration_bot" in self.browser.current_url, 'Не корректный url'
 
     def checkout_logo_in_blog(self):
         assert self.element_is_visible(Main.LOGO_IN_BLOG), 'Отсутствует лого ExLab блоге'
 
     def checkout_inscriptions_in_blog(self):
-        assert self.element_is_visible(*Main.INSCRIPTION_IN_BLOG), 'Надпись "Твоя возможность" отсутствует'
-        # assert self.element_is_visible(Main.ALL_INSCRIPTION_IN_BLOG), 'Надпись "Получить Тот самый опыт" не найдена'
-        assert self.browser.find_element(*Main.ALL_INSCRIPTION_IN_BLOG).is_displayed(), 'нету'
+        # Надпись Твоя возможность
+        test_elem = 'Твоя возможность:'
+        elem = self.get_element_text(*Main.INSCRIPTION_IN_BLOG)
+        assert elem == test_elem, f'Элемент "{test_elem}" не найден'
+        # Текст под надписью Твоя возможность
+        text_in_elem = self.get_element_text(*Main.INSCRIPTION_ALL)
+        assert 'ПОЛУЧИТЬ ТОТ САМЫЙ ОПЫТ' in text_in_elem, 'Текст не найден'
+        assert 'ПОРАБОТАТЬ В КОМАНДЕ' in text_in_elem, 'Текст не найден'
+        assert 'СОЗДАТЬ ПРОЕКТ С НУЛЯ' in text_in_elem, 'Текст не найден'
+        assert 'ПОПОЛНИТЬ ПОРТФОЛИО' in text_in_elem, 'Текст не найден'
 
     def block_abouts_us(self):
-        assert self.element_is_visible(Main.TopMenu.ABOUT_US), "Ссылка <<О нас>> отсутствует в топ меню"
+        # Надпись О нас в блоке
         self.element_is_visible(Main.TopMenu.ABOUT_US).click()
-        assert self.browser.find_element(By.LINK_TEXT, 'стартовали').is_displayed()
-        # assert self.element_is_visible(Main.EnterMenu.IN_ABOUT_US), "Надпись <<О нас>> отсутствует в блоке"
-        # assert self.is_element_present_tes(Main.Block.TEXT_IN_BLOCK_ABOUT_US), 'В блоке нет текста'
+        about_us = self.element(*Main.EnterMenu.IN_ABOUT_US)
+        assert about_us.is_displayed(), 'Надпись "О нас" не отображается'
+        assert about_us.text == 'О нас', 'Не верный текст надписи "О нас"'
+        # Текст в блоке О нас
+        text_about_us = self.browser.find_element(By.XPATH, "//p[@class='sc-cCsOjp cdaqyF']")
+        assert text_about_us.is_displayed(), 'Текст в блоке "О нас" не отображается'
+        assert "Мы стартовали в апреле 2022 года" in text_about_us.text, 'Текст отсутствует'
 
 
 
