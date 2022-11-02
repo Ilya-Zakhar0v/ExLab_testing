@@ -19,8 +19,14 @@ class BasePage():
     def get_element_text(self, how, what):
         return self.browser.find_element(how, what).text
 
+    # Поиск элемента
     def element(self, how, what):
         return self.browser.find_element(how, what)
+
+    # Перемещение скролла к элеменету
+    def go_to_element(self, element):
+        self.browser.execute_script("arguments[0].scrollIntoView(true);", element)
+
 
 
     # Проверяет видимость элемента на странице
@@ -42,13 +48,6 @@ class BasePage():
     # Кликабельный элемент
     def element_is_clickable(self, locator, timeout=10):
         return wait(self.browser, timeout).until(ec.element_to_be_clickable(locator))
-
-    # Перемещение скролла к элеменету
-    def go_to_element(self):
-        self.browser.execute_script("window.scrollTo(0, 1080);")
-
-    def scroll_to_down(self):
-        self.browser.execute_script()
 
 
 

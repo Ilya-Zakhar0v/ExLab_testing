@@ -35,4 +35,16 @@ class Main:
         IN_STARTUP = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains(text(), 'StartUp для')]")
 
     class Block:
+        BLOCK_TEXT_ABOUT_US = (By.XPATH, "//div[@id='about']/div[contains(text(), 'О нас')]")
         TEXT_IN_BLOCK_ABOUT_US = (By.LINK_TEXT, "Мы стартовали в апреле 2022 года")
+
+        # Блок Почему ExLab
+        GO_TO_WHY = (By.XPATH, "//div[@class='sc-jdAMXn iDQeOI']")
+
+        # Текст Почему ExLab
+        BLOCK_TEXT_WHY_EXLAB = (By.XPATH, "//div[@class='sc-jdAMXn iDQeOI']/div[contains(text(), 'Почему ExLab?')]")
+        # Текст в блоке Почему ExLab
+        TEXT_IN_BLOCK_WHY_EXLAB = (By.CLASS_NAME, "sc-iAvgwm fQGFrP is-inview")
+
+        # Кнопка Присоединиться в блоке Почему ExLab
+        BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/a[@href='https://t.me/ExLab_registration_bot']")

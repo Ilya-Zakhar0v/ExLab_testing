@@ -96,7 +96,20 @@ def test_block_about_us(browser):
     block_about_us.open()
     block_about_us.block_abouts_us()
 
-#####
+
+def test_block_why_exlab(browser):
+    """ № 14. Отображение надписи Почему ExLab """
+    why_exlab = MainPage(browser)
+    why_exlab.open()
+    why_exlab.block_why_exlab()
+
+
+def test_join_button_is_visible(browser):
+    """ Отображение кнопки [Присоединиться] """
+    join_button_is_visible = MainPage(browser)
+    join_button_is_visible.open()
+    join_button_is_visible.join_button_in_block()
+
 
 
 

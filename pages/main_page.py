@@ -1,6 +1,11 @@
+import time
+
+from selenium.webdriver.support.wait import WebDriverWait
+
 from .base_page import BasePage
 from .top_menu import TopMenu
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from locators import Main
 
@@ -67,6 +72,38 @@ class MainPage(BasePage):
         assert text_about_us.is_displayed(), 'Текст в блоке "О нас" не отображается'
         assert "Мы стартовали в апреле 2022 года" in text_about_us.text, 'Текст отсутствует'
 
+    def block_why_exlab(self):
+        # self.browser.execute_script("arguments[0].scrollIntoView();", self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]"))
+        # actions = ActionChains(self.browser)
+        # actions.move_to_element(elem).perform()
+        # WebDriverWait(self.browser, timeout=5).until(ec.visibility_of(self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]")))
+        # self.browser.execute_script("return arguments[0].scrollIntoView();", self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]"))
+        # self.browser.execute_script("argument[0].scrollIntoView();", element)
+        # self.go_to_element(self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]"))
+
+
+        elem_why_exlab = self.element(*Main.Block.GO_TO_WHY)
+        self.go_to_element(elem_why_exlab)
+
+        # Отображение надписи Почему ExLab
+        why_exlab = 'Почему ExLab?'
+        assert why_exlab in elem_why_exlab.get_property('innerText'), "Не корректный вывод. ОР - 'Почему ExLab?'"
+
+        # Отображение текста под надписью Почему ExLab?
+        text_why_exlab_01 = 'Опыт стоит дорого, но не у нас. Участие в проектах бесплатное'
+        text_why_exlab_02 = 'У нас есть те, кто умеет. Поддержка менторов от идеи до запуска проекта.'
+        text_why_exlab_03 = 'Знаем, чего хотят рекрутеры.'
+        text_why_exlab_04 = 'Создаём оригинальные проекты, придуманные нашими участниками.'
+
+        assert text_why_exlab_01 in elem_why_exlab.get_property('innerText'), "Не корректный текст 01"
+        assert text_why_exlab_02 in elem_why_exlab.get_property('innerText'), "Не корректный текст 02"
+        assert text_why_exlab_03 in elem_why_exlab.get_property('innerText'), "Не корректный текст 03"
+        assert text_why_exlab_04 in elem_why_exlab.get_property('innerText'), "Не корректный текст 04"
+
+    def join_button_in_block(self):
+        btn_join = self.element(*Main.Block.BTN_JOIN)
+        self.go_to_element(btn_join)
+        time.sleep(3)
 
 
 
@@ -74,9 +111,4 @@ class MainPage(BasePage):
 
 
 
-
-
-# Отсутствие горизонтального скролла
-#    def search_to_gorizont_scroll(self):
-#       login_link = self.browser.
 
