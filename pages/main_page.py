@@ -92,13 +92,12 @@ class MainPage(BasePage):
         assert text_why_exlab_04 in elem_why_exlab.get_property('innerText'), "Не корректный текст 04"
 
     def join_button_in_block(self):
+        # elem = self.is_element_present2(Main.Block.BTN_JOIN)
+        # self.go_to_element(elem)
+        # elem.click()
+        # time.sleep(4)
 
-        elem = self.is_element_present2(Main.Block.BTN_JOIN)
-        self.go_to_element(elem)
-        elem.click()
-        time.sleep(4)
-
-
+        assert self.presence_of_element(Main.Block.BTN_JOIN) is True, 'Не найден'
 
 
 

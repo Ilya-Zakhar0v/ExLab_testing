@@ -20,10 +20,17 @@ class BasePage:
     def get_element_text(self, how, what):
         return self.browser.find_element(how, what).text
 
+    def presence_of_element(self, locator, timeout=5):
+        try:
+            elem = WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located(locator),
+                                                              message=f'Локатор {locator} не найден')
+        except NoSuchElementException:
+            return False
+        return True
+
     # Перемещение скролла к элеменету
     def go_to_element(self, element):
-       return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
-
+        return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
 
     # Поиск элемента
     def element(self, how, what):
@@ -49,14 +56,14 @@ class BasePage:
             return 'False'
         return self.browser.find_element(*element)
 
-
-
-
-
-
-    # Проверяет видимость элемента на странице
-    def element_is_visible(self, locator, timeout=5):
-        return wait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
+    # Перейти к элементу
+    def move_to_element(self, element, timeout=5):
+        try:
+            btn = wait(self.browser, timeout).until(ec.element_to_be_clickable(element))
+            btn.click()
+        except NoSuchElementException:
+            return False
+        return True
 
     # Ждем пока все элементы не будут видимы
     def elements_are_visible(self, locator, timeout=5):
@@ -77,35 +84,29 @@ class BasePage:
     """ ------------- OTUS ------------- """
 
     # def element(self, selector):
-        #by = None
-        #if link_text:
-        #    by = By.LINK_TEXT
-        #elif 'css' in selector.keys():
-        #    by = By.CSS_SELECTOR
-        #    selector = selector['css']
-        #elif 'xpath' in selector.keys():
-        #    by = By.XPATH
-        #    selector = selector['xpath']
-        # return self.browser.find_elements(selector)
+    # by = None
+    # if link_text:
+    #    by = By.LINK_TEXT
+    # elif 'css' in selector.keys():
+    #    by = By.CSS_SELECTOR
+    #    selector = selector['css']
+    # elif 'xpath' in selector.keys():
+    #    by = By.XPATH
+    #    selector = selector['xpath']
+    # return self.browser.find_elements(selector)
 
+    #    def click(self, selector):
+    #        ActionChains(self.browser).move_to_element(self.element(selector)).click().perform()
+    #
+    #    def input(self, selector, value):
+    #        element = self.element(selector)
+    #        element.clear()
+    #        element.send_keys(value)
 
-#    def click(self, selector):
-#        ActionChains(self.browser).move_to_element(self.element(selector)).click().perform()
-#
-#    def input(self, selector, value):
-#        element = self.element(selector)
-#        element.clear()
-#        element.send_keys(value)
-
-#    def wait_for_visible(self, selector, wait=3):
-#        return WebDriverWait(self.browser, wait).until(ec.visibility_of(self.element(selector)))
-
-#    def get_element_text(self, selector):
-#        return self.element(selector).text
+    #    def wait_for_visible(self, selector, wait=3):
+    #        return WebDriverWait(self.browser, wait).until(ec.visibility_of(self.element(selector)))
 
     """ ------------- OTUS ------------- """
-
-
 
     # Клик по элементу
 #    def click(self, selector):
@@ -113,10 +114,6 @@ class BasePage:
 #        ActionChains(self.browser).move_to_element(self.browser(selector)).click().perform()
 
 
-
-#    def find_element(self, locator, time=10):
-#        return WebDriverWait(self.browser, time).until(ec.presence_of_element_located(locator),
-#                                                       message=f'Локатор {locator} не найден')
 
 #    def click(self, selector, index=0):
 #        ActionChains(self.browser).move_to_element(self.element(selector, index)).click().perform()
@@ -138,4 +135,3 @@ class BasePage:
 #            return True
 #        else:
 #            return False
-

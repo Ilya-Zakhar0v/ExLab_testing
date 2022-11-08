@@ -29,8 +29,8 @@ class Main:
         START_UP = (By.XPATH, "//a[@href='#startup'][@class='sc-evZas hJsxZw']")
 
     class EnterMenu:
-        IN_ABOUT_US = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'О нас')]")
-        IN_PROJECTS = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]")
+        IN_ABOUT_US = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'О нас')]")
+        IN_PROJECTS = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]")  # Раб
         IN_MENTORS = (By.XPATH, "//div[@id='mentors']/div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'Менторы')]")
         IN_STARTUP = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains(text(), 'StartUp для')]")
 
