@@ -13,22 +13,22 @@ from locators import Main
 class MainPage(BasePage):
 
     # Проверка URL
-    def check_url(self):
-        assert self.browser.current_url == 'http://test.exlab.team/', 'Не корректный url'
-        # assert 'test.exlab.team' in self.browser.current_url, 'Не корректный url'
+    def check_landing_url(self):
+        landing_url = self.browser.current_url
+        assert landing_url == 'http://test.exlab.team/', f'Не корректный url, ожидаем: {landing_url}'
+        assert 'test.exlab.team' in self.browser.current_url, f'Не корректный url, ожидаем: {landing_url}'
         # assert WebDriverWait(self.browser, 5).until(ec.url_to_be('http://test.exlab.team/')), 'Не корректный url'
 
     # Dark Theme
     def background_color(self):
         black_background = 'sc-bczRLJ ckyTig'
-        # white_background = 'sc-bczRLJ cxdoLY'
+        white_background = 'sc-bczRLJ cxdoLY'
         assert self.browser.find_element(*Main.DARK_BACKGROUND).get_attribute('class') == black_background,\
             'Некорретная тема лендинга (ОР: Black)'
 
     # Search Logo ExLab
     def lending_logo(self):
-        # assert self.is_element_present_tes(Main.LOGO)
-        assert self.element_is_visible(Main.LOGO), 'Лого не найдено'
+        assert self.is_element_present(*Main.LOGO), 'Лого не найдено'
 
     # Search Sun Icon
     def sun_icon(self):
@@ -101,10 +101,26 @@ class MainPage(BasePage):
         assert text_why_exlab_04 in elem_why_exlab.get_property('innerText'), "Не корректный текст 04"
 
     def join_button_in_block(self):
-        btn_join = self.element(*Main.Block.BTN_JOIN)
-        self.go_to_element(btn_join)
-        time.sleep(3)
+        # btn_join = self.element(*Main.Block.BTN_JOIN)
+        # self.go_to_element(btn_join)
+        # btn_join.click()
 
+
+        ## self.browser.execute_script("window.scrollBy(0, 1080);")
+        # self.element(*Main.Block.BTN_JOIN)
+        # self.go_to_element(self.element(*Main.Block.BTN_JOIN))
+
+        position = self.browser.find_element(*Main.Block.BTN_JOIN)
+        self.go_to_element(position)
+        position.click()
+
+
+
+        # рабочий assert self.is_element_present(*Main.Block.BTN_JOIN) is True, "Не найден"
+        # рабочий self.click(*Main.Block.BTN_JOIN)
+
+        # ActionChains(self.browser).move_to_element(self.element(*Main.Block.BTN_JOIN)).click()
+        time.sleep(3)
 
 
 

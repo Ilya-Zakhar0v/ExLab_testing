@@ -5,7 +5,7 @@ class Main:
 
     DARK_BACKGROUND = (By.XPATH, "//div[@class='sc-bczRLJ ckyTig']")
     WHITE_BACKGROUND = (By.XPATH, "//div[@class='sc-bczRLJ cxdoLY']")
-    LOGO = (By.XPATH, "//div[@class='sc-gKXOVf kORzJB']/div[@id='logo_mobile']")
+    LOGO = (By.XPATH, "//img[@alt='gif_logo']")
 
     LOGO_2 = {"xpath": "//div[@class='sc-gKXOVf kORzJB']/div[@id='logo_mobile']"}
 
@@ -48,3 +48,7 @@ class Main:
 
         # Кнопка Присоединиться в блоке Почему ExLab
         BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/a[@href='https://t.me/ExLab_registration_bot']")
+        # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and @href='https://t.me/ExLab_registration_bot']")
+
+
+

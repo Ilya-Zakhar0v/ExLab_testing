@@ -14,7 +14,7 @@ def test_landing_url(browser):
     """ № 1. Проверка url + Dark Theme """
     landing_url = MainPage(browser)
     landing_url.open()
-    landing_url.check_url()
+    landing_url.check_landing_url()
     landing_url.background_color()
 
 
@@ -105,7 +105,7 @@ def test_block_why_exlab(browser):
 
 
 def test_join_button_is_visible(browser):
-    """ Отображение кнопки [Присоединиться] """
+    """ № 15. Отображение кнопки [Присоединиться] """
     join_button_is_visible = MainPage(browser)
     join_button_is_visible.open()
     join_button_is_visible.join_button_in_block()

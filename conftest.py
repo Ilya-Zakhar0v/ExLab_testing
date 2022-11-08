@@ -23,7 +23,6 @@ def browser(request):
     headless = request.config.getoption('headless')
 
     if browser_name == "chrome":
-        print("\nstart chrome browser")
         # Чтобы указать язык браузера, использую класс Options и метод add_experimental_option
         # Без браузерный режим для 'Chrome'
         options = Options()
@@ -40,8 +39,6 @@ def browser(request):
         browser.maximize_window()  # Открываем браузер на весь экран
 
     elif browser_name == "firefox":
-
-        print("\nstart firefox browser")
         # Без браузерный режим для 'Firefox', через импорт библиотеки 'os'
         if headless == 'true':
             os.environ['MOZ_HEADLESS'] = '1'
