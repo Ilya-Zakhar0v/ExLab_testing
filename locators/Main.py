@@ -49,6 +49,6 @@ class Main:
         # Кнопка Присоединиться в блоке Почему ExLab
         BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/a[@href='https://t.me/ExLab_registration_bot']")
         # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and @href='https://t.me/ExLab_registration_bot']")
-
+        # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and contains(text(), 'Присоединиться')]")
 
 

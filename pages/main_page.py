@@ -73,15 +73,6 @@ class MainPage(BasePage):
         assert "Мы стартовали в апреле 2022 года" in text_about_us.text, 'Текст отсутствует'
 
     def block_why_exlab(self):
-        # self.browser.execute_script("arguments[0].scrollIntoView();", self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]"))
-        # actions = ActionChains(self.browser)
-        # actions.move_to_element(elem).perform()
-        # WebDriverWait(self.browser, timeout=5).until(ec.visibility_of(self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]")))
-        # self.browser.execute_script("return arguments[0].scrollIntoView();", self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]"))
-        # self.browser.execute_script("argument[0].scrollIntoView();", element)
-        # self.go_to_element(self.browser.find_element(By.XPATH, "//div[@class='sc-bZnhIo CLhmH is-inview' and contains(text(), 'Почему ExLab?')]"))
-
-
         elem_why_exlab = self.element(*Main.Block.GO_TO_WHY)
         self.go_to_element(elem_why_exlab)
 
@@ -101,26 +92,15 @@ class MainPage(BasePage):
         assert text_why_exlab_04 in elem_why_exlab.get_property('innerText'), "Не корректный текст 04"
 
     def join_button_in_block(self):
-        # btn_join = self.element(*Main.Block.BTN_JOIN)
-        # self.go_to_element(btn_join)
-        # btn_join.click()
 
-
-        ## self.browser.execute_script("window.scrollBy(0, 1080);")
-        # self.element(*Main.Block.BTN_JOIN)
-        # self.go_to_element(self.element(*Main.Block.BTN_JOIN))
-
-        position = self.browser.find_element(*Main.Block.BTN_JOIN)
-        self.go_to_element(position)
-        position.click()
+        elem = self.is_element_present2(Main.Block.BTN_JOIN)
+        self.go_to_element(elem)
+        elem.click()
+        time.sleep(4)
 
 
 
-        # рабочий assert self.is_element_present(*Main.Block.BTN_JOIN) is True, "Не найден"
-        # рабочий self.click(*Main.Block.BTN_JOIN)
 
-        # ActionChains(self.browser).move_to_element(self.element(*Main.Block.BTN_JOIN)).click()
-        time.sleep(3)
 
 
 

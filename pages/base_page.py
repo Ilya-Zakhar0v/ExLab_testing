@@ -17,13 +17,13 @@ class BasePage:
     def open(self):
         return self.browser.get(self.url)
 
-    # Перемещение скролла к элеменету
-    def go_to_element(self, element):
-        return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
-
-
     def get_element_text(self, how, what):
         return self.browser.find_element(how, what).text
+
+    # Перемещение скролла к элеменету
+    def go_to_element(self, element):
+       return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
+
 
     # Поиск элемента
     def element(self, how, what):
@@ -41,6 +41,13 @@ class BasePage:
         except NoSuchElementException('Элемент не найден'):
             return False
         return True
+
+    def is_element_present2(self, element):
+        try:
+            self.browser.find_element(*element)
+        except NoSuchElementException('Элемент не найден'):
+            return 'False'
+        return self.browser.find_element(*element)
 
 
 
@@ -82,7 +89,6 @@ class BasePage:
         # return self.browser.find_elements(selector)
 
 
-
 #    def click(self, selector):
 #        ActionChains(self.browser).move_to_element(self.element(selector)).click().perform()
 #
@@ -105,7 +111,7 @@ class BasePage:
 #    def click(self, selector):
 #        WebDriverWait(self.browser, 10).until(ec.element_to_be_clickable())
 #        ActionChains(self.browser).move_to_element(self.browser(selector)).click().perform()
-# ActionChains(self.browser).move_to_element()
+
 
 
 #    def find_element(self, locator, time=10):
@@ -133,7 +139,3 @@ class BasePage:
 #        else:
 #            return False
 
-####
-#
-#
-#
