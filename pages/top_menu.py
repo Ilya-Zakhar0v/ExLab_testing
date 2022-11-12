@@ -8,9 +8,9 @@ class TopMenu(BasePage):
 
     # Search 'About Us'
     def checkout_about_us_in_top_menu(self):
-        assert self.is_element_present(*Main.TopMenu.ABOUT_US) is True, "Ссылка <<О нас>> отсутствует в топ меню"
+        assert self.presence_of_element(*Main.TopMenu.ABOUT_US) is True, "Ссылка <<О нас>> отсутствует в топ меню"
         self.click(*Main.TopMenu.ABOUT_US)
-        assert self.is_element_present(*Main.EnterMenu.IN_ABOUT_US) is True, "Элемент <<О нас>> отсутствует на странице"
+        assert self.presence_of_element(*Main.EnterMenu.IN_ABOUT_US) is True, "Элемент <<О нас>> отсутствует на странице"
 
     # Search 'Project'
     def checkout_projects_in_top_menu(self):

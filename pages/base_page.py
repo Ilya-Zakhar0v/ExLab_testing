@@ -1,11 +1,9 @@
 import time
-
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait  # Явное ожидаение
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
@@ -17,69 +15,52 @@ class BasePage:
     def open(self):
         return self.browser.get(self.url)
 
-    def get_element_text(self, how, what):
-        return self.browser.find_element(how, what).text
+    def get_element_text(self, by, value):
+        return self.browser.find_element(by, value).text
 
-    def presence_of_element(self, locator, timeout=5):
+    # Проверка элемента в DOM
+    def presence_of_element(self, by, value, timeout=5):
         try:
-            elem = WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located(locator),
-                                                              message=f'Локатор {locator} не найден')
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((by, value)), message=f'Локатор {(by, value)} отсутствует в DOM')
+            return True
+        except (NoSuchElementException, TimeoutException):
+            return False
+
+    # Проверка видимости элемента на странице
+    def visability_of_element(self, by, value, timeout=5):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.visibility_of_element_located((by, value)), message=f'Локатор {(by, value)} не виден на странице')
+            return True
+        except (NoSuchElementException, TimeoutException):
+            return False
+
+    # Scroll to be element
+    def scroll_to_element(self, by, value):
+        try:
+            element = self.browser.find_element(by, value)
+            self.browser.execute_script("return arguments[0].scrollIntoView();", element)
+            return True
         except NoSuchElementException:
             return False
-        return True
 
-    # Перемещение скролла к элеменету
-    def go_to_element(self, element):
-        return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
-
-    # Поиск элемента
-    def element(self, how, what):
-        return self.browser.find_element(how, what)
-
-    def wait_for_visible(self, how, what, timeout=5):
-        return WebDriverWait(self.browser, timeout).until(ec.visibility_of(self.element(how, what)))
-
-    def click(self, how, what):
-        ActionChains(self.browser).move_to_element(self.element(how, what)).click().perform()
-
-    def is_element_present(self, how, what):
+    # Clickable
+    def click_to_elem(self, by, value):
         try:
-            self.browser.find_element(how, what)
-        except NoSuchElementException('Элемент не найден'):
+            element = WebDriverWait(self.browser, 5).until(EC.element_to_be_clickable((by, value)))
+            # element = self.browser.find_element(by, value)
+            # time.sleep(1)
+            scroll = self.browser.execute_script("return arguments[0].scrollIntoView();", element)
+            # WebDriverWait(self.browser, 7).until(EC.element_to_be_clickable(element))
+            time.sleep(2)
+            scroll.click()
+            # return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
+            return True
+        except (NoSuchElementException, TimeoutException):
             return False
-        return True
 
-    def is_element_present2(self, element):
-        try:
-            self.browser.find_element(*element)
-        except NoSuchElementException('Элемент не найден'):
-            return 'False'
-        return self.browser.find_element(*element)
+    def new_scroll_and_click(self, locator: tuple, timeout: int = 5):
+        return WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(*locator)).click()
 
-    # Перейти к элементу
-    def move_to_element(self, element, timeout=5):
-        try:
-            btn = wait(self.browser, timeout).until(ec.element_to_be_clickable(element))
-            btn.click()
-        except NoSuchElementException:
-            return False
-        return True
-
-    # Ждем пока все элементы не будут видимы
-    def elements_are_visible(self, locator, timeout=5):
-        return wait(self.browser, timeout).until(ec.visibility_of_all_elements_located(locator))
-
-    # Поиск скрытого элемента
-    def element_is_present(self, locator, timeout=10):
-        return wait(self.browser, timeout).until(ec.presence_of_element_located(locator))
-
-    # Поиск всех элементов
-    def element_are_present(self, locator, timeout=10):
-        return wait(self.browser, timeout).until(ec.presence_of_all_elements_located(locator))
-
-    # Кликабельный элемент
-    def element_is_clickable(self, locator, timeout=10):
-        return wait(self.browser, timeout).until(ec.element_to_be_clickable(locator))
 
     """ ------------- OTUS ------------- """
 
@@ -108,25 +89,14 @@ class BasePage:
 
     """ ------------- OTUS ------------- """
 
-    # Клик по элементу
-#    def click(self, selector):
-#        WebDriverWait(self.browser, 10).until(ec.element_to_be_clickable())
-#        ActionChains(self.browser).move_to_element(self.browser(selector)).click().perform()
+
+
+
 
 
 
 #    def click(self, selector, index=0):
 #        ActionChains(self.browser).move_to_element(self.element(selector, index)).click().perform()
-
-
-# Проверка видимости элемента на странице
-# How - как, what - какие
-#    def element_is_visible(self, how, what):
-#        try:
-#            WebDriverWait(self, 20).until(ec.visibility_of_element_located((how, what)))
-#        except TimeoutException:
-#            return False
-#        return True
 
 #    def check_link_href(self, locator, href):
 #        element = WebDriverWait(self, 10).until(ec.presence_of_element_located(locator))

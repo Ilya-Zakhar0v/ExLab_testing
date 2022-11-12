@@ -47,7 +47,8 @@ class Main:
         TEXT_IN_BLOCK_WHY_EXLAB = (By.CLASS_NAME, "sc-iAvgwm fQGFrP is-inview")
 
         # Кнопка Присоединиться в блоке Почему ExLab
-        BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/a[@href='https://t.me/ExLab_registration_bot']")
+        BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/child::*")
+        # BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/a[@href='https://t.me/ExLab_registration_bot']")
         # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and @href='https://t.me/ExLab_registration_bot']")
         # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and contains(text(), 'Присоединиться')]")
 

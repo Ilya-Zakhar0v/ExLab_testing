@@ -28,7 +28,7 @@ class MainPage(BasePage):
 
     # Search Logo ExLab
     def lending_logo(self):
-        assert self.is_element_present(*Main.LOGO), 'Лого не найдено'
+        assert self.presence_of_element(*Main.LOGO), 'Лого не найдено'
 
     # Search Sun Icon
     def sun_icon(self):
@@ -92,14 +92,12 @@ class MainPage(BasePage):
         assert text_why_exlab_04 in elem_why_exlab.get_property('innerText'), "Не корректный текст 04"
 
     def join_button_in_block(self):
-        # elem = self.is_element_present2(Main.Block.BTN_JOIN)
-        # self.go_to_element(elem)
-        # elem.click()
-        # time.sleep(4)
-
-        assert self.presence_of_element(Main.Block.BTN_JOIN) is True, 'Не найден'
-
-
+        assert self.presence_of_element(*Main.Block.BTN_JOIN) is True, 'Элемент отсутствует в DOM'
+        # self.scroll_to_element(*Main.Block.BTN_JOIN)
+        # assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, 'Элемент не виден'
+        # self.click_to_elem(*Main.Block.BTN_JOIN)
+        self.new_scroll_and_click(*Main.Block.BTN_JOIN)
+        time.sleep(1)
 
 
 
