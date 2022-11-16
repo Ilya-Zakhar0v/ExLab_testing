@@ -29,10 +29,10 @@ class Main:
         START_UP = (By.XPATH, "//a[@href='#startup'][@class='sc-evZas hJsxZw']")
 
     class EnterMenu:
-        IN_ABOUT_US = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'О нас')]")
-        IN_PROJECTS = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH' and contains (text(), 'Проекты')]")  # Раб
-        IN_MENTORS = (By.XPATH, "//div[@id='mentors']/div[@class='sc-eCYdqJ koNCEH is-inview' and contains (text(), 'Менторы')]")
-        IN_STARTUP = (By.XPATH, "//div[@class='sc-eCYdqJ koNCEH is-inview' and contains(text(), 'StartUp для')]")
+        IN_ABOUT_US = (By.XPATH, "//div[@class='sc-himrzO bOhFlH' and @id='about']")
+        IN_PROJECTS = (By.XPATH, "//div[@class='sc-gSAPjG bbCMbW' and @id='projects']")
+        IN_MENTORS = (By.XPATH, "//div[@class='sc-fXynhf fCBIwr' and @id='mentors']")
+        IN_STARTUP = (By.XPATH, "//div[@class='sc-iNWwEs iGujvc' and @id='startup']")
 
     class Block:
         BLOCK_TEXT_ABOUT_US = (By.XPATH, "//div[@id='about']/div[contains(text(), 'О нас')]")

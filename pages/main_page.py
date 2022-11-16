@@ -17,7 +17,6 @@ class MainPage(BasePage):
         landing_url = self.browser.current_url
         assert landing_url == 'http://test.exlab.team/', f'Не корректный url, ожидаем: {landing_url}'
         assert 'test.exlab.team' in self.browser.current_url, f'Не корректный url, ожидаем: {landing_url}'
-        # assert WebDriverWait(self.browser, 5).until(ec.url_to_be('http://test.exlab.team/')), 'Не корректный url'
 
     # Dark Theme
     def background_color(self):
@@ -33,8 +32,9 @@ class MainPage(BasePage):
     # Search Sun Icon
     def sun_icon(self):
         white_background = 'sc-bczRLJ cxdoLY'
-        assert self.element_is_visible(Main.SUN_ICON), 'Sun Icon отсутствует'
-        self.element_is_visible(Main.SUN_ICON).click()
+        assert self.presence_of_element(*Main.SUN_ICON) is True, "Икнонка 'Sun Icon' отсутствует в DOM"
+        assert self.visability_of_element(*Main.SUN_ICON) is True, "Икнонка 'Sun Icon' не отображается на стр."
+        # self.element_is_visible(Main.SUN_ICON).click()
         assert self.browser.find_element(*Main.WHITE_BACKGROUND).\
                    get_attribute('class') == white_background, 'Не корркетный цвет background (ОР: WHITE)'
 
@@ -92,12 +92,17 @@ class MainPage(BasePage):
         assert text_why_exlab_04 in elem_why_exlab.get_property('innerText'), "Не корректный текст 04"
 
     def join_button_in_block(self):
-        assert self.presence_of_element(*Main.Block.BTN_JOIN) is True, 'Элемент отсутствует в DOM'
-        # self.scroll_to_element(*Main.Block.BTN_JOIN)
-        # assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, 'Элемент не виден'
-        # self.click_to_elem(*Main.Block.BTN_JOIN)
-        self.new_scroll_and_click(*Main.Block.BTN_JOIN)
-        time.sleep(1)
+        assert self.presence_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' отсутствует в DOM"
+        self.scroll(*Main.Block.BTN_JOIN)
+        assert self.element_clickable(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не кликабельна"
+        assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не видна на стр."
+        self.click_to_element(*Main.Block.BTN_JOIN)
+        time.sleep(3)
+        assert self.check_window(self.browser) is True, 'errrorss'
+
+
+
+
 
 
 

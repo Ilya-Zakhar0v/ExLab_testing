@@ -18,24 +18,50 @@ class BasePage:
     def get_element_text(self, by, value):
         return self.browser.find_element(by, value).text
 
-    # Проверка элемента в DOM
-    def presence_of_element(self, by, value, timeout=5):
+    def presence_of_element(self, by, value):
+        """ Presence element in the DOM """
         try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((by, value)), message=f'Локатор {(by, value)} отсутствует в DOM')
+            WebDriverWait(self.browser, 5).until(EC.presence_of_element_located((by, value)))
             return True
         except (NoSuchElementException, TimeoutException):
             return False
 
-    # Проверка видимости элемента на странице
-    def visability_of_element(self, by, value, timeout=5):
+    def visability_of_element(self, by, value):
+        """ Element to be visibility """
         try:
-            WebDriverWait(self.browser, timeout).until(EC.visibility_of_element_located((by, value)), message=f'Локатор {(by, value)} не виден на странице')
+            WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((by, value)))
             return True
         except (NoSuchElementException, TimeoutException):
             return False
 
-    # Scroll to be element
+    def element_clickable(self, by, value):
+        """ Element to be clickable """
+        try:
+            WebDriverWait(self.browser, 5).until(EC.element_to_be_clickable((by, value)))
+            return True
+        except (NoSuchElementException, TimeoutException):
+            return False
+
+    def click_to_element(self, by, value):
+        """ Click """
+        try:
+            self.browser.find_element(by, value).click()
+            return True
+        except (NoSuchElementException, TimeoutException):
+            return False
+
+    def scroll(self, by, value):
+        """ Scroll to element (ActionChains) """
+        try:
+            elem = self.browser.find_element(by, value)
+            time.sleep(0.5)
+            ActionChains(self.browser).move_to_element(elem).perform()
+            return True
+        except NoSuchElementException:
+            return False
+
     def scroll_to_element(self, by, value):
+        """ Scroll to element (JS)"""
         try:
             element = self.browser.find_element(by, value)
             self.browser.execute_script("return arguments[0].scrollIntoView();", element)
@@ -43,23 +69,20 @@ class BasePage:
         except NoSuchElementException:
             return False
 
-    # Clickable
-    def click_to_elem(self, by, value):
-        try:
-            element = WebDriverWait(self.browser, 5).until(EC.element_to_be_clickable((by, value)))
-            # element = self.browser.find_element(by, value)
-            # time.sleep(1)
-            scroll = self.browser.execute_script("return arguments[0].scrollIntoView();", element)
-            # WebDriverWait(self.browser, 7).until(EC.element_to_be_clickable(element))
-            time.sleep(2)
-            scroll.click()
-            # return self.browser.execute_script("return arguments[0].scrollIntoView();", element)
-            return True
-        except (NoSuchElementException, TimeoutException):
-            return False
+    def check_window(self, browser):
+        new_window = browser.window_handles
+        if len(new_window) > 1:
+            print(f'\nОткрыто {len(new_window)} вкладыки: {new_window}')
+            browser.switch_to.window(new_window[1])  # Переместиться к нужной вкладке
+            print(f'URL текущей вкладки: {browser.current_url}')
+            obj = browser.switch_to.alert
+            print(obj.text)
+            #WebDriverWait(browser, 5).until(EC.alert_is_present())
+            #alert = browser.switch_to.alert
+            #print(alert.text)
+            #if self.browser.switch_to.alert() in new_window:
+                #print()
 
-    def new_scroll_and_click(self, locator: tuple, timeout: int = 5):
-        return WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(*locator)).click()
 
 
     """ ------------- OTUS ------------- """

@@ -1,39 +1,37 @@
 from .base_page import BasePage
 from locators import Main
-import time
-from selenium.webdriver.common.by import By
 
 
 class TopMenu(BasePage):
 
     # Search 'About Us'
     def checkout_about_us_in_top_menu(self):
-        assert self.presence_of_element(*Main.TopMenu.ABOUT_US) is True, "Ссылка <<О нас>> отсутствует в топ меню"
-        self.click(*Main.TopMenu.ABOUT_US)
-        assert self.presence_of_element(*Main.EnterMenu.IN_ABOUT_US) is True, "Элемент <<О нас>> отсутствует на странице"
+        assert self.presence_of_element(*Main.TopMenu.ABOUT_US) is True, "Кнопка 'О нас' отсутствует в DOM"
+        assert self.visability_of_element(*Main.TopMenu.ABOUT_US) is True, "Кнопка 'О нас' отсутствует на стр."
+        self.scroll(*Main.EnterMenu.IN_ABOUT_US)
+        assert self.presence_of_element(*Main.EnterMenu.IN_ABOUT_US) is True, "Текс 'О нас' отсутствует в DOM"
+        assert self.visability_of_element(*Main.EnterMenu.IN_ABOUT_US) is True, "Текст 'О нас' отсутствует на стр."
 
     # Search 'Project'
     def checkout_projects_in_top_menu(self):
-        assert self.is_element_present(*Main.TopMenu.PROJECTS) is True, "Ссылка <<Проекты>> отсутствует в топ меню"
-        self.click(*Main.TopMenu.PROJECTS)
-        assert self.is_element_present(*Main.EnterMenu.IN_PROJECTS) is True, "Элемент <<Проекты>> отсутствует на странице"
-        time.sleep(2)
-
+        assert self.presence_of_element(*Main.TopMenu.PROJECTS) is True, "Кнопка 'Проекты' отсутствует в DOM"
+        assert self.visability_of_element(*Main.TopMenu.PROJECTS) is True, "Кнопка 'Проекты' отсутствует на стр."
+        self.scroll(*Main.EnterMenu.IN_PROJECTS)
+        assert self.presence_of_element(*Main.EnterMenu.IN_PROJECTS) is True, "Текст 'Проекты' отсутствует в DOM"
+        assert self.visability_of_element(*Main.EnterMenu.IN_PROJECTS) is True, "Текст 'Проекты' отсутствует на стр."
 
     # Search 'Mentors'
     def checkout_mentors_top_menu(self):
-        assert self.element_is_visible(Main.TopMenu.MENTORS), "Ссылка <<Менторы>> отсутствует в топ меню"
-        assert self.element_is_clickable(Main.TopMenu.MENTORS), "Ссылка не кликабельна"
-        self.element_is_visible(Main.TopMenu.MENTORS).click()
-        assert self.element_is_visible(Main.EnterMenu.IN_MENTORS), "Элемент <<Менторы>> отсутствует в теле страницы"
+        assert self.presence_of_element(*Main.TopMenu.MENTORS) is True, "Кнопка 'Менторы' отсутствует в DOM"
+        assert self.visability_of_element(*Main.TopMenu.MENTORS) is True, "Кнопка 'Менторы' отсутствует на стр."
+        self.scroll(*Main.EnterMenu.IN_MENTORS)
+        assert self.presence_of_element(*Main.EnterMenu.IN_MENTORS) is True, "Текст 'Менторы' отсутствует в DOM"
+        assert self.visability_of_element(*Main.EnterMenu.IN_MENTORS) is True, "Текст 'Менторы' отсутствует на стр."
 
     # Search 'StartUp for'
     def checkout_startup_top_menu(self):
-        assert self.element_is_visible(Main.TopMenu.START_UP), "Ссылка <<StartUp для>> отсутствует в топ меню"
-        assert self.element_is_clickable(Main.TopMenu.START_UP), "Ссылка не кликабельна"
-        self.element_is_visible(Main.TopMenu.MENTORS).click()
-        assert self.element_is_visible(Main.EnterMenu.IN_STARTUP), "Элемент <<StartUp для>> отсутствует в теле страницы"
-        # self.go_to_element()
-        time.sleep(2)
-
-
+        assert self.presence_of_element(*Main.TopMenu.START_UP) is True, "Кнопка 'StartUp для' отсутствует в DOM"
+        assert self.visability_of_element(*Main.TopMenu.START_UP) is True, "Кнопка 'StartUp для' отсутствует на стр."
+        self.scroll(*Main.EnterMenu.IN_STARTUP)
+        assert self.presence_of_element(*Main.EnterMenu.IN_STARTUP) is True, "Текст 'StartUp для' отсутствует в DOM"
+        assert self.visability_of_element(*Main.EnterMenu.IN_STARTUP) is True, "Текст 'StartUp для' отсутствует на стр."
