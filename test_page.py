@@ -111,6 +111,20 @@ def test_join_button_is_visible(browser):
     join_button_is_visible.join_button_in_block()
 
 
+def test_text_projects(browser):
+    """ № 16. Отображение надписи [Проекты] """
+    projects = MainPage(browser)
+    projects.open()
+    projects.check_text_in_projects()
+
+
+def test_all_logo(browser):
+    """ № 17. Отображение всех логотипов и текста """
+    all_logo = MainPage(browser)
+    all_logo.open()
+    all_logo.check_all_logo()
+
+
 
 
 #def test_otus(browser):

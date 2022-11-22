@@ -1,5 +1,6 @@
 import time
 
+import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 
 from .base_page import BasePage
@@ -11,7 +12,7 @@ from locators import Main
 
 
 class MainPage(BasePage):
-
+    locators = Main()
     # Проверка URL
     def check_landing_url(self):
         landing_url = self.browser.current_url
@@ -47,19 +48,34 @@ class MainPage(BasePage):
         assert self.browser.current_url == 'https://t.me/ExLab_registration_bot', 'Не корректный url'
 
     def checkout_logo_in_blog(self):
-        assert self.element_is_visible(Main.LOGO_IN_BLOG), 'Отсутствует лого ExLab блоге'
+        assert self.presence_of_element(*Main.LOGO_IN_BLOG) is True, 'Отсутствует лого ExLab в DOM'
+        assert self.visability_of_element(*Main.LOGO_IN_BLOG) is True, 'Отсутствует отображение лого ExLab на стр.'
 
     def checkout_inscriptions_in_blog(self):
         # Надпись Твоя возможность
-        test_elem = 'Твоя возможность:'
+        test_elem = 'Твоя возможность'
         elem = self.get_element_text(*Main.INSCRIPTION_IN_BLOG)
-        assert elem == test_elem, f'Элемент "{test_elem}" не найден'
+        assert self.presence_of_element(*Main.INSCRIPTION_IN_BLOG) is True, f"Элемент {test_elem} отсутствует в DOM"
+        assert self.visability_of_element(*Main.INSCRIPTION_IN_BLOG) is True, f"Элемент {test_elem} не отображается на стр."
+        assert test_elem in elem, f'Элемент "{elem}" не найден'
+
+        assert self.check_elem_in_text(*Main.INSCRIPTION_ALL) is True, "ОШИБКА"
+
+        # assert self.search_text_elem_in(*Main.INSCRIPTION_ALL) is True, "Не найден"
+
+        # assert "ПОЛУЧИТЬ ТОТ САМЫЙ ОПЫТ" in all_elem, 'no'
+        # assert "ПОРАБОТАТЬ В КОМАНДЕ" in all_elem, 'no'
+        # assert "СОЗДАТЬ ПРОЕКТ С НУЛЯ" in all_elem, 'no'
+        # assert "ПОПОЛНИТЬ ПОРТФОЛИО" in all_elem, 'no'
+
+
+
         # Текст под надписью Твоя возможность
-        text_in_elem = self.get_element_text(*Main.INSCRIPTION_ALL)
-        assert 'ПОЛУЧИТЬ ТОТ САМЫЙ ОПЫТ' in text_in_elem, 'Текст не найден'
-        assert 'ПОРАБОТАТЬ В КОМАНДЕ' in text_in_elem, 'Текст не найден'
-        assert 'СОЗДАТЬ ПРОЕКТ С НУЛЯ' in text_in_elem, 'Текст не найден'
-        assert 'ПОПОЛНИТЬ ПОРТФОЛИО' in text_in_elem, 'Текст не найден'
+        #text_in_elem = self.get_element_text(*Main.INSCRIPTION_ALL)
+        #assert 'ПОЛУЧИТЬ ТОТ САМЫЙ ОПЫТ' in text_in_elem, 'Текст не найден'
+        #assert 'ПОРАБОТАТЬ В КОМАНДЕ' in text_in_elem, 'Текст не найден'
+        #assert 'СОЗДАТЬ ПРОЕКТ С НУЛЯ' in text_in_elem, 'Текст не найден'
+        #assert 'ПОПОЛНИТЬ ПОРТФОЛИО' in text_in_elem, 'Текст не найден'
 
     def block_abouts_us(self):
         # Надпись О нас в блоке
@@ -95,10 +111,26 @@ class MainPage(BasePage):
         assert self.presence_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' отсутствует в DOM"
         self.scroll(*Main.Block.BTN_JOIN)
         assert self.element_clickable(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не кликабельна"
-        assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не видна на стр."
+        assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не отображается"
         self.click_to_element(*Main.Block.BTN_JOIN)
-        time.sleep(3)
-        assert self.check_window(self.browser) is True, 'errrorss'
+        assert self.check_url_in_new_window() == "https://t.me/ExLab_registration_bot", \
+            "Не корректный URL в новой вкладке"
+
+    def check_text_in_projects(self):
+        assert self.get_text_in_prop(self.locators.EnterMenu.IN_PROJECTS_TEXT, "textContent") == "Проекты", \
+            "Текст Проекты отсутствует в DOM"
+        self.scroll(*Main.EnterMenu.IN_PROJECTS_TEXT)
+        assert self.visability_of_element(*Main.EnterMenu.IN_PROJECTS_TEXT) is True, "Текст 'Проекты' не отображается"
+
+    def check_all_logo(self):
+        assert self.presence_all_elements(self.locators.Block.ALL_LOGO_IN_BLOCK, prop="currentSrc")
+        self.scroll(*Main.Block.LOGO_EASY_HELP)
+        self.visability_all_elements(self.locators.Block.ALL_LOGO_IN_BLOCK)
+
+
+
+
+
 
 
 

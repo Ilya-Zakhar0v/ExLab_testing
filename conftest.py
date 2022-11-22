@@ -29,6 +29,10 @@ def browser(request):
         if headless == 'true':
             options.add_argument('headless')
 
+        # options.add_argument("--disable-extensions")
+        # options.add_argument("--disable-infobars")
+
+        options.add_argument("--disable-notifications")  # Выкл notification
         # // Отключение сообщений в консоли типа: USB: usb_device_handle...
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         # // Выбор языка страницы

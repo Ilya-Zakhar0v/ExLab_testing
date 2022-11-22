@@ -17,9 +17,12 @@ class Main:
     # LOGO_IN_BLOG = (By.XPATH, "//img[@src='./gif/logo.gif']")
     LOGO_IN_BLOG = (By.XPATH, "//img[@alt='gif_logo']")
 
-    INSCRIPTION_IN_BLOG = (By.XPATH, "//div[@class='sc-kgflAQ gupdxc' and contains(text(), 'Твоя возможность')]")
-    INSCRIPTION_ALL = (By.XPATH, "//ol[@class='sc-ivTmOn iPWoOL']")
+    INSCRIPTION_IN_BLOG = (By.XPATH, "//div[@class='sc-kgflAQ gupdxc' and contains(text(), 'Твоя возможность:')]")
+
+    # INSCRIPTION_ALL = (By.CSS_SELECTOR, "ol[class*='sc-ivTmOn iPWoOL']>li")
+    INSCRIPTION_ALL = (By.CSS_SELECTOR, "div[class*='sc-bBrHrO lmeoyY']")
     INSCRIPTION_IN_BLOG_01 = (By.XPATH, "//li[@class='sc-cxabCf iOiPKd'][1]")
+    SEND_KEY_IN_TG = (By.CSS_SELECTOR, "a[class='tgme_action_button_new shine']")
 
     class TopMenu:
 
@@ -30,7 +33,11 @@ class Main:
 
     class EnterMenu:
         IN_ABOUT_US = (By.XPATH, "//div[@class='sc-himrzO bOhFlH' and @id='about']")
+
         IN_PROJECTS = (By.XPATH, "//div[@class='sc-gSAPjG bbCMbW' and @id='projects']")
+        # IN_PROJECTS_TEXT = (By.CSS_SELECTOR, "[id='projects'] > [class='sc-eCYdqJ koNCEH']")
+        IN_PROJECTS_TEXT = (By.CSS_SELECTOR, "div[id='projects'] > div.sc-eCYdqJ")
+
         IN_MENTORS = (By.XPATH, "//div[@class='sc-fXynhf fCBIwr' and @id='mentors']")
         IN_STARTUP = (By.XPATH, "//div[@class='sc-iNWwEs iGujvc' and @id='startup']")
 
@@ -48,8 +55,9 @@ class Main:
 
         # Кнопка Присоединиться в блоке Почему ExLab
         BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/child::*")
-        # BTN_JOIN = (By.XPATH, "//div[@class='sc-iTONeN egXhsc']/a[@href='https://t.me/ExLab_registration_bot']")
-        # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and @href='https://t.me/ExLab_registration_bot']")
-        # BTN_JOIN = (By.XPATH, "//a[@class='sc-dkzDqf gpYSxm is-inview' and contains(text(), 'Присоединиться')]")
+        # Все лого в блоке
+        ALL_LOGO_IN_BLOCK = (By.CSS_SELECTOR, "img[class='sc-bBXxYQ hEflMO']")
+
+        LOGO_EASY_HELP = (By.CSS_SELECTOR, "img[class='sc-bBXxYQ hEflMO'][alt='Easyhelp ']")
 
 
