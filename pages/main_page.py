@@ -113,6 +113,8 @@ class MainPage(BasePage):
         assert self.element_clickable(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не кликабельна"
         assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не отображается"
         self.click_to_element(*Main.Block.BTN_JOIN)
+        # self.switch_to_window(1)
+        # time.sleep(2)
         assert self.check_url_in_new_window() == "https://t.me/ExLab_registration_bot", \
             "Не корректный URL в новой вкладке"
 

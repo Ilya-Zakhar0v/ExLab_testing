@@ -108,19 +108,22 @@ class BasePage:
         except NoSuchElementException:
             return False
 
-    def check_url_in_new_window(self):
+    def check_url_in_new_window(self, number_window: int = 1):
         """ Check URL in new window """
-        all_windows = self.browser.window_handles
-        if len(all_windows) != 1:
-            new_window = self.browser.window_handles[1]
-            print(f'\nOpen {len(all_windows)} windows: {all_windows}')
-            self.browser.switch_to.window(new_window)
-            try:
-                url_in_new_windows = self.browser.current_url
-                print(f"URL in new windows {url_in_new_windows}")
-                return url_in_new_windows
-            except TimeoutException:
-                return False
+        # all_windows = self.browser.window_handles
+        # if len(all_windows) != 1:
+        #    new_window = self.browser.window_handles[1]
+        #    print(f'\nOpen {len(all_windows)} windows: {all_windows}')
+        #    self.browser.switch_to.window(new_window)
+
+        print(f'\nOpen {len(self.browser.window_handles)} windows: {self.browser.window_handles}')
+        self.browser.switch_to.window(self.browser.window_handles[number_window])
+        try:
+            url_in_new_windows = self.browser.current_url
+            print(f"URL in new windows {url_in_new_windows}")
+            return url_in_new_windows
+        except TimeoutException:
+            return False
 
 
     """ ------------- OTUS ------------- """
