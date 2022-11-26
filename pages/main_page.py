@@ -113,8 +113,6 @@ class MainPage(BasePage):
         assert self.element_clickable(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не кликабельна"
         assert self.visability_of_element(*Main.Block.BTN_JOIN) is True, "Кнопка 'Присоединиться' не отображается"
         self.click_to_element(*Main.Block.BTN_JOIN)
-        # self.switch_to_window(1)
-        # time.sleep(2)
         assert self.check_url_in_new_window() == "https://t.me/ExLab_registration_bot", \
             "Не корректный URL в новой вкладке"
 
@@ -125,9 +123,12 @@ class MainPage(BasePage):
         assert self.visability_of_element(*Main.EnterMenu.IN_PROJECTS_TEXT) is True, "Текст 'Проекты' не отображается"
 
     def check_all_logo(self):
-        assert self.presence_all_elements(self.locators.Block.ALL_LOGO_IN_BLOCK, prop="currentSrc")
-        self.scroll(*Main.Block.LOGO_EASY_HELP)
-        self.visability_all_elements(self.locators.Block.ALL_LOGO_IN_BLOCK)
+        assert self.presence_all_elements(self.locators.Block.ALL_LOGO_IN_BLOCK)
+        # self.scroll(*self.locators.Block.FOOTER)
+        # self.get_text(self.locators.Block.FOOTER)
+
+        # self.scroll(*self.locators.Block.FOOTER)
+        self.get_text(self.locators.Block.ALL)
 
 
 

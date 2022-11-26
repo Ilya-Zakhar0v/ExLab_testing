@@ -37,6 +37,15 @@ class BasePage:
             # print(f"\nТекст аттрибута: {get_text.get_attribute('textContent')}")
             # return get_text.get_attribute('textContent')
 
+    def get_text(self, locator):
+        try:
+            element = WebDriverWait(self.browser, 5).until(EC.visibility_of_all_elements_located(locator))
+            for elem in element:
+                print(elem.text)
+            return element
+        except TimeoutException:
+            return False
+
     def presence_of_element(self, by, value):
         """ Presence element in the DOM """
         try:
@@ -45,12 +54,11 @@ class BasePage:
         except (NoSuchElementException, TimeoutException):
             return False
 
-    def presence_all_elements(self, locator, prop: str):
+    def presence_all_elements(self, locator):
         """ Presence of all elements in the DOM """
         try:
             elements = WebDriverWait(self.browser, 5).until(EC.presence_of_all_elements_located(locator))
-            # for elem in elements:
-            #     print(f"Property: {elem.get_property(prop)}")
+            print(f"Count elements in DOM: {len(elements)}")
             return True
         except TimeoutException:
             return False
@@ -67,9 +75,8 @@ class BasePage:
         """ All elements to be visibility """
         try:
             elements = WebDriverWait(self.browser, 5).until(EC.visibility_of_all_elements_located(locator))
-            elem = elements.get_dom_attribute('src')
-            print(elements)
-            return True
+            print(f"Counts visability elements: {len(elements)}")
+            return elements
         except TimeoutException:
             return False
 
@@ -99,10 +106,10 @@ class BasePage:
         except NoSuchElementException:
             return False
 
-    def scroll_to_element(self, by, value):
+    def scroll_to_element(self, locator):
         """ Scroll to element (JS)"""
         try:
-            element = self.browser.find_element(by, value)
+            element = self.browser.find_element(locator)
             self.browser.execute_script("return arguments[0].scrollIntoView();", element)
             return True
         except NoSuchElementException:
@@ -110,20 +117,23 @@ class BasePage:
 
     def check_url_in_new_window(self, number_window: int = 1):
         """ Check URL in new window """
-        # all_windows = self.browser.window_handles
-        # if len(all_windows) != 1:
-        #    new_window = self.browser.window_handles[1]
-        #    print(f'\nOpen {len(all_windows)} windows: {all_windows}')
-        #    self.browser.switch_to.window(new_window)
-
-        print(f'\nOpen {len(self.browser.window_handles)} windows: {self.browser.window_handles}')
-        self.browser.switch_to.window(self.browser.window_handles[number_window])
+        window = self.browser.window_handles
+        print(f'\nOpen {len(window)} windows: {window}')
+        self.browser.switch_to.window(window[number_window])
         try:
             url_in_new_windows = self.browser.current_url
             print(f"URL in new windows {url_in_new_windows}")
             return url_in_new_windows
         except TimeoutException:
             return False
+
+    def check_alert(self):
+        try:
+            alert = WebDriverWait(self.browser, 6).until(EC.alert_is_present())
+            print(alert.text)
+        except TimeoutException:
+            return False
+
 
 
     """ ------------- OTUS ------------- """

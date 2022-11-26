@@ -60,4 +60,6 @@ class Main:
 
         LOGO_EASY_HELP = (By.CSS_SELECTOR, "img[class='sc-bBXxYQ hEflMO'][alt='Easyhelp ']")
 
+        ALL = (By.CSS_SELECTOR, "ul[class='sc-iqcoie PhsYS']")
+
 
